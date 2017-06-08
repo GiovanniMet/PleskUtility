@@ -10,4 +10,4 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
-mysql -Ns -uadmin -p`cat /etc/psa/.psa.shadow` -D psa -e "select h.www_root from domains d join hosting h on h.dom_id=d.id left join ftp_users fu on fu.dom_id=d.id join sys_users su on (fu.sys_user_id=su.id or h.sys_user_id=su.id) where d.name='$1'";
+mysql -Ns -uadmin -p`cat /etc/psa/.psa.shadow` -D psa -e "select h.www_root from domains d join hosting h on h.dom_id=d.id left join ftp_users fu on fu.dom_id=d.id join sys_users su on (fu.sys_user_id=su.id or h.sys_user_id=su.id) where d.name='$1' limit 1";
